@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  ffmpeg-api:
+    container_name: ffmpeg-api
+    build: .
+    restart: unless-stopped
+    environment:
+      - VIRTUAL_HOST=ffmpeg.site.com.br
+      - LETSENCRYPT_HOST=ffmpeg.site.com.br
+      - LETSENCRYPT_EMAIL=email@gmail.com
+    expose:
+      - "3000"
+    networks:
+      - nginx-proxy
+
+networks:
+  nginx-proxy:
+    external: true
